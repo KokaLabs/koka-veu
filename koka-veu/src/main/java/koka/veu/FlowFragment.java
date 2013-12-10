@@ -33,11 +33,11 @@ public class FlowFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater,
                            ViewGroup container,
                            Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+    View rootView = inflater.inflate(R.layout.fragment_flow_item, container, false);
 
     // Show the dummy content as text in a TextView.
     if (photo != null) {
-      ((TextView) rootView.findViewById(R.id.item_detail)).setText(photo.toString());
+      ((TextView) rootView.findViewById(R.id.flow_item)).setText(photo.toString());
     }
     return rootView;
   }
