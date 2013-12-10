@@ -6,7 +6,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 public class PhotosFragment extends Fragment {
-  private GridView gridview;
+  protected GridView gridview;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -22,5 +22,21 @@ public class PhotosFragment extends Fragment {
 
   public interface Callbacks {
     void onItemSelected(String id);
+  }
+
+  public static final class TwoPanePhotosFragment extends PhotosFragment {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      gridview.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
+    }
+  }
+
+  public static final class SinglePanePhotosFragment extends PhotosFragment {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      gridview.setChoiceMode(GridView.CHOICE_MODE_NONE);
+    }
   }
 }

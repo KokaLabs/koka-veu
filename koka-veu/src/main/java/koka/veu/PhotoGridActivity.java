@@ -18,7 +18,9 @@ public class PhotoGridActivity extends FragmentActivity implements PhotosFragmen
 
     FragmentManager fragMan = getFragmentManager();
     if (savedInstanceState == null) {
-      PhotosFragment grid = new PhotosFragment();
+      PhotosFragment grid = mTwoPane
+          ? new PhotosFragment.TwoPanePhotosFragment()
+          : new PhotosFragment.SinglePanePhotosFragment();
       FragmentTransaction ft = fragMan.beginTransaction();
       ft.add(R.id.photogrid, grid).commit();
     }
