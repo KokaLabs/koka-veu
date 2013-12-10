@@ -2,9 +2,9 @@ package koka.veu;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 public class PhotoGridActivity extends FragmentActivity
     implements PhotosFragment.Callbacks {
@@ -28,15 +28,10 @@ public class PhotoGridActivity extends FragmentActivity
   }
 
   @Override
-  public void onItemSelected(String id) {
+  public void onPhotoSelected(View toAdd) {
     if (mTwoPane) {
-      // In two-pane mode, show the detail view in this activity by
-      // adding or replacing the detail fragment using a
-      // fragment transaction.
-      Bundle arguments = new Bundle();
-      arguments.putString(ItemDetailFragment.ARG_ITEM_ID, id);
-      ItemDetailFragment fragment = new ItemDetailFragment();
-      fragment.setArguments(arguments);
+      FlowFragment fragment = new FlowFragment();
+      fragment.addPhoto(toAdd);
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.flow_container, fragment)
           .commit();
@@ -44,9 +39,9 @@ public class PhotoGridActivity extends FragmentActivity
     } else {
       // In single-pane mode, simply start the detail activity
       // for the selected item ID.
-      Intent detailIntent = new Intent(this, ItemDetailActivity.class);
-      detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
-      startActivity(detailIntent);
+//      Intent detailIntent = new Intent(this, ItemDetailActivity.class);
+//      detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
+//      startActivity(detailIntent);
     }
   }
 }
