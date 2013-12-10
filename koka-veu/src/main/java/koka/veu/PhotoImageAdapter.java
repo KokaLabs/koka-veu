@@ -30,7 +30,7 @@ public class PhotoImageAdapter extends BaseAdapter {
     if (convertView == null) {  // if it's not recycled, initialize some attributes
       imageView = new SquareImageView(mContext);
       imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      imageView.setPadding(1, 1, 1, 1);
+      imageView.setPadding(0, 0, 0, 0);
     } else {
       imageView = (ImageView) convertView;
     }

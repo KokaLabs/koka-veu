@@ -13,7 +13,7 @@
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/photogrid"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="2"
         android:numColumns="10"
         android:stretchMode="columnWidth"
