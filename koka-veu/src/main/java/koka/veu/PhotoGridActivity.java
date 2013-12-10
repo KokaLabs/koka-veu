@@ -15,7 +15,7 @@ public class PhotoGridActivity extends FragmentActivity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.gallery);
 
-    mTwoPane = findViewById(R.id.item_detail_container) != null;
+    mTwoPane = findViewById(R.id.flow_container) != null;
 
     FragmentManager fragMan = getFragmentManager();
     if (savedInstanceState == null) {
