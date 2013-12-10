@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/koka-veu.iml" filepath="$PROJECT_DIR$/koka-veu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/koka-veu/koka-veu-koka-veu.iml" filepath="$PROJECT_DIR$/koka-veu/koka-veu-koka-veu.iml" />
+    </modules>
+  </component>
+</project>
+
