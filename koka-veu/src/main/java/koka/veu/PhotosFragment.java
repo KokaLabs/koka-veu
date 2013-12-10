@@ -8,7 +8,7 @@ public class PhotosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GridView gridview = (GridView) this.getActivity().findViewById(R.id.photogridview);
+        GridView gridview = (GridView) this.getActivity().findViewById(R.id.photogrid);
         gridview.setAdapter(new PhotoImageAdapter(this.getActivity()));
     }
 

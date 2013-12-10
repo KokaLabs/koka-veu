@@ -14,17 +14,18 @@ public class PhotoGridActivity extends FragmentActivity implements PhotosFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
+
         if (savedInstanceState == null) {
             Fragment newFragment = new PhotosFragment();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.photogridview, newFragment).commit();
+            ft.add(R.id.photogrid, newFragment).commit();
         }
 
         if (findViewById(R.id.item_detail_container) != null) {
             mTwoPane = true;
-            ((ItemListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.photogridview))
-                    .setActivateOnItemClick(true);
+//            ((PhotosFragment) getFragmentManager()
+//                    .findFragmentById(R.id.photogrid));
+//                    .setActivateOnItemClick(true);
         }
     }
 
