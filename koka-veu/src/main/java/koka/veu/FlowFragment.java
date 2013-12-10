@@ -9,12 +9,6 @@ import android.widget.TextView;
 
 import koka.veu.dummy.DummyContent;
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link koka.veu.ItemListActivity}
- * in two-pane mode (on tablets) or a {@link koka.veu.ItemDetailActivity}
- * on handsets.
- */
 public class FlowFragment extends Fragment {
   private View photo;
 
@@ -34,8 +28,6 @@ public class FlowFragment extends Fragment {
                            ViewGroup container,
                            Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_flow_item, container, false);
-
-    // Show the dummy content as text in a TextView.
     if (photo != null) {
       ((TextView) rootView.findViewById(R.id.flow_item)).setText(photo.toString());
     }
