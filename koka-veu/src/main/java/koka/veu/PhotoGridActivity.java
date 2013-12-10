@@ -38,7 +38,7 @@ public class PhotoGridActivity extends FragmentActivity
       ItemDetailFragment fragment = new ItemDetailFragment();
       fragment.setArguments(arguments);
       getSupportFragmentManager().beginTransaction()
-          .replace(R.id.item_detail_container, fragment)
+          .replace(R.id.flow_container, fragment)
           .commit();
 
     } else {
