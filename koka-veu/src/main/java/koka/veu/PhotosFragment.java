@@ -3,21 +3,24 @@ package koka.veu;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.ListView;
 
 public class PhotosFragment extends Fragment {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        GridView gridview = (GridView) this.getActivity().findViewById(R.id.photogrid);
-        gridview.setAdapter(new PhotoImageAdapter(this.getActivity()));
-    }
+  private GridView gridview;
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    gridview = (GridView) this.getActivity().findViewById(R.id.photogrid);
+    gridview.setAdapter(new PhotoImageAdapter(this.getActivity()));
+  }
 
-    public interface Callbacks {
-        void onItemSelected(String id);
-    }
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+  }
+
+  public interface Callbacks {
+    void onItemSelected(String id);
+  }
 }
