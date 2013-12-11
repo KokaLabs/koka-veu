@@ -17,8 +17,13 @@ public class PhotoImageAdapter extends BaseAdapter {
     return mThumbIds.length;
   }
 
+  @Override
   public Object getItem(int position) {
-    return null;
+    return getItemAt(position);
+  }
+
+  public static Integer getItemAt(int position) {
+    return mThumbIds[position];
   }
 
   public long getItemId(int position) {
@@ -39,7 +44,7 @@ public class PhotoImageAdapter extends BaseAdapter {
     return imageView;
   }
 
-  private Integer[] mThumbIds = {
+  private static Integer[] mThumbIds = {
       R.drawable.sample_2, R.drawable.sample_3,
       R.drawable.sample_4, R.drawable.sample_5,
       R.drawable.sample_6, R.drawable.sample_7,

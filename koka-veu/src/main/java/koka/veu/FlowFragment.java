@@ -5,18 +5,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import koka.veu.dummy.DummyContent;
+import android.widget.ImageView;
 
 public class FlowFragment extends Fragment {
-  private View photo;
+  private Integer photo;
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
    * fragment (e.g. upon screen orientation changes).
    */
-  public FlowFragment() {}
+  public FlowFragment() {
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -27,14 +26,20 @@ public class FlowFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater,
                            ViewGroup container,
                            Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.fragment_flow_item, container, false);
+    View rootView = inflater.inflate(R.layout.flow, container, false);
     if (photo != null) {
-      ((TextView) rootView.findViewById(R.id.flow_item)).setText(photo.toString());
+      ImageView imageView;
+      imageView = new SquareImageView(getActivity());
+      imageView.setMaxHeight(container.getHeight());
+      imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+      imageView.setPadding(0, 0, 0, 0);
+      imageView.setImageResource(photo);
+      container.addView(imageView);
     }
     return rootView;
   }
 
-  public void addPhoto(View toAdd) {
+  public void addPhoto(Integer toAdd) {
     this.photo = toAdd;
   }
 }

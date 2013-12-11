@@ -28,10 +28,10 @@ public class PhotoGridActivity extends FragmentActivity
   }
 
   @Override
-  public void onPhotoSelected(View toAdd) {
+  public void onPhotoSelected(Integer photoId) {
     if (mTwoPane) {
       FlowFragment fragment = new FlowFragment();
-      fragment.addPhoto(toAdd);
+      fragment.addPhoto(photoId);
       getSupportFragmentManager().beginTransaction()
           .replace(R.id.flow_container, fragment)
           .commit();

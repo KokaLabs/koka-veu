@@ -18,7 +18,7 @@ public abstract class PhotosFragment extends Fragment {
    */
   private static Callbacks sDummyCallbacks = new Callbacks() {
     @Override
-    public void onPhotoSelected(View id) {
+    public void onPhotoSelected(Integer photoId) {
     }
   };
 
@@ -53,7 +53,7 @@ public abstract class PhotosFragment extends Fragment {
   }
 
   public interface Callbacks {
-    void onPhotoSelected(View photoToShow);
+    void onPhotoSelected(Integer photoId);
   }
 
   public static final class TwoPanePhotosFragment extends PhotosFragment {
@@ -68,7 +68,7 @@ public abstract class PhotosFragment extends Fragment {
       final Activity a = this.getActivity();
       return new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-          mCallbacks.onPhotoSelected(new PhotoImageAdapter(a).getView(position, v, parent));
+          mCallbacks.onPhotoSelected(PhotoImageAdapter.getItemAt(position));
           Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
         }
       };
