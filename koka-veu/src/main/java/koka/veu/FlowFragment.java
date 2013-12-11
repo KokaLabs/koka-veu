@@ -29,9 +29,8 @@ public class FlowFragment extends Fragment {
     View rootView = inflater.inflate(R.layout.flow, container, false);
     if (photo != null) {
       ImageView imageView;
-      imageView = new SquareImageView(getActivity());
-      imageView.setMaxHeight(container.getHeight());
-      imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+      imageView = new ImageView(getActivity());
+      imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
       imageView.setPadding(0, 0, 0, 0);
       imageView.setImageResource(photo);
       container.addView(imageView);
