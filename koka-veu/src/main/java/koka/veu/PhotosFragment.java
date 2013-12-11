@@ -65,7 +65,6 @@ public abstract class PhotosFragment extends Fragment {
 
     @Override
     protected AdapterView.OnItemClickListener onPhotoClick() {
-      final Activity a = this.getActivity();
       return new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
           mCallbacks.onPhotoSelected(PhotoImageAdapter.getItemAt(position));
