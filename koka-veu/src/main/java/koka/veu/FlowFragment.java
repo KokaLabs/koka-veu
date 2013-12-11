@@ -7,8 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class FlowFragment extends Fragment {
-  private Integer photo;
+  private List<Integer> photos = new ArrayList<Integer>();
 
   /**
    * Mandatory empty constructor for the fragment manager to instantiate the
@@ -27,7 +31,7 @@ public class FlowFragment extends Fragment {
                            ViewGroup container,
                            Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.flow, container, false);
-    if (photo != null) {
+    for (Integer photo : photos) {
       ImageView imageView;
       imageView = new ImageView(getActivity());
       imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -39,6 +43,10 @@ public class FlowFragment extends Fragment {
   }
 
   public void addPhoto(Integer toAdd) {
-    this.photo = toAdd;
+    this.photos.add(toAdd);
+  }
+
+  public void addPhotos(Integer[] photoIds) {
+    this.photos.addAll(Arrays.asList(photoIds));
   }
 }

@@ -44,4 +44,15 @@ public class PhotoGridActivity extends FragmentActivity
 //      startActivity(detailIntent);
     }
   }
+
+  @Override
+  public void onPhotosSelected(Integer[] photoIds) {
+    if (mTwoPane) {
+      FlowFragment fragment = new FlowFragment();
+      fragment.addPhotos(photoIds);
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.flow_container, fragment)
+          .commit();
+    }
+  }
 }

@@ -3,10 +3,17 @@ package koka.veu;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import java.util.Set;
 
 public abstract class PhotosFragment extends Fragment {
   protected GridView gridview;
@@ -20,6 +27,10 @@ public abstract class PhotosFragment extends Fragment {
     @Override
     public void onPhotoSelected(Integer photoId) {
     }
+
+    @Override
+    public void onPhotosSelected(Integer[] photoIds) {
+    }
   };
 
   @Override
@@ -27,7 +38,51 @@ public abstract class PhotosFragment extends Fragment {
     super.onCreate(savedInstanceState);
     gridview = (GridView) this.getActivity().findViewById(R.id.photogrid);
     gridview.setAdapter(new PhotoImageAdapter(this.getActivity()));
-    gridview.setOnItemClickListener(onPhotoClick());
+//    gridview.setOnItemClickListener(onPhotosSelected());
+    gridview.setMultiChoiceModeListener(new GridView.MultiChoiceModeListener() {
+      @Override
+      public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+        MenuInflater inflater = actionMode.getMenuInflater();
+        inflater.inflate(R.menu.gallery_multiselect, menu);
+        return true;
+      }
+
+      @Override
+      public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+        return false;
+      }
+
+      @Override
+      public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        StringBuilder sb = new StringBuilder();
+//        Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
+//        for (Integer pos : positions) {
+//          sb.append(" " + pos + ",");
+//        }
+        sb.append("rawr");
+        Toast.makeText(getActivity(), sb.toString(), Toast.LENGTH_SHORT).show();
+        actionMode.finish();
+        return false;
+      }
+
+      public void onItemCheckedStateChanged(
+          ActionMode mode, int position, long id, boolean checked) {
+        int selectCount = gridview.getCheckedItemCount();
+        switch (selectCount) {
+          case 1:
+            mode.setSubtitle("One item selected");
+            break;
+          default:
+            mode.setSubtitle("" + selectCount + " items selected");
+            break;
+        }
+      }
+
+      @Override
+      public void onDestroyActionMode(ActionMode actionMode) {
+//        mAdapter.clearSelection();
+      }
+    });
   }
 
   @Override
@@ -45,7 +100,7 @@ public abstract class PhotosFragment extends Fragment {
     mCallbacks = sDummyCallbacks;
   }
 
-  protected abstract AdapterView.OnItemClickListener onPhotoClick();
+  protected abstract AbsListView.MultiChoiceModeListener onPhotosSelected();
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
@@ -54,23 +109,26 @@ public abstract class PhotosFragment extends Fragment {
 
   public interface Callbacks {
     void onPhotoSelected(Integer photoId);
+
+    void onPhotosSelected(Integer[] photoIds);
   }
 
   public static final class TwoPanePhotosFragment extends PhotosFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      gridview.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
+      gridview.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
     }
 
     @Override
-    protected AdapterView.OnItemClickListener onPhotoClick() {
-      return new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-          mCallbacks.onPhotoSelected(PhotoImageAdapter.getItemAt(position));
-          Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
-        }
-      };
+    protected AbsListView.MultiChoiceModeListener onPhotosSelected() {
+      return null;
+//      return new AdapterView.OnItemClickListener() {
+//        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+//          mCallbacks.onPhotoSelected(PhotoImageAdapter.getItemAt(position));
+//          Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+//        }
+//      };
     }
   }
 
@@ -82,12 +140,13 @@ public abstract class PhotosFragment extends Fragment {
     }
 
     @Override
-    protected AdapterView.OnItemClickListener onPhotoClick() {
-      return new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-          Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
-        }
-      };
+    protected AbsListView.MultiChoiceModeListener onPhotosSelected() {
+      return null;
+//      return new AdapterView.OnItemClickListener() {
+//        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+//          Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+//        }
+//      };
     }
   }
 }
