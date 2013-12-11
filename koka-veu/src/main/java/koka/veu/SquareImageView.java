@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public class SquareImageView extends ImageView {
-
   public SquareImageView(final Context context) {
     super(context);
   }
