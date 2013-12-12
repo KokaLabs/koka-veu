@@ -33,15 +33,7 @@ public class GalleryMultiChoiceListener
 
   @Override
   public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-    StringBuilder sb = new StringBuilder();
-//        Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
-//        for (Integer pos : positions) {
-//          sb.append(" " + pos + ",");
-//        }
     mCallbacks.onPhotosSelected(selectedPhotos);
-    selectedPhotos.clear();
-
-    sb.append("rawr");
     actionMode.finish();
     return false;
   }
@@ -54,6 +46,6 @@ public class GalleryMultiChoiceListener
 
   @Override
   public void onDestroyActionMode(ActionMode actionMode) {
-//        mAdapter.clearSelection();
+    selectedPhotos.clear();
   }
 }
