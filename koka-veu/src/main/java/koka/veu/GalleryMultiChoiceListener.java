@@ -33,7 +33,13 @@ public class GalleryMultiChoiceListener
 
   @Override
   public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-    mCallbacks.onPhotosSelected(selectedPhotos);
+    switch (menuItem.getItemId()) {
+      case R.id.gallery_multiselect_confirm:
+        mCallbacks.onPhotosSelected(selectedPhotos);
+        break;
+      default:
+        throw new IllegalArgumentException("menu selection not supported");
+    }
     actionMode.finish();
     return false;
   }
