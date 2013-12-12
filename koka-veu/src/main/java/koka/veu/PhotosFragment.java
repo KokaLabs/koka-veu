@@ -35,7 +35,13 @@ public abstract class PhotosFragment extends Fragment {
     gridview.setAdapter(new PhotoImageAdapter(this.getActivity()));
     gridview.setOnItemClickListener(onPhotoSelected());
     gridview.setMultiChoiceModeListener(
-        new GalleryMultiChoiceListener(mCallbacks));
+        new GalleryMultiChoiceListener() {
+          @Override
+          protected Callbacks callback() {
+            return mCallbacks;
+          }
+        }
+    );
   }
 
   @Override

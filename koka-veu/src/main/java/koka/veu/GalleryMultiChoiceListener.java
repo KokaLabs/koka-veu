@@ -10,14 +10,11 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryMultiChoiceListener
+public abstract class GalleryMultiChoiceListener
     implements GridView.MultiChoiceModeListener {
   private List<Integer> selectedPhotos = new ArrayList<Integer>();
-  private final PhotosFragment.Callbacks mCallbacks;
 
-  public GalleryMultiChoiceListener(PhotosFragment.Callbacks mCallbacks) {
-    this.mCallbacks = mCallbacks;
-  }
+  protected abstract PhotosFragment.Callbacks callback();
 
   @Override
   public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
@@ -35,7 +32,7 @@ public class GalleryMultiChoiceListener
   public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
     switch (menuItem.getItemId()) {
       case R.id.gallery_multiselect_confirm:
-        mCallbacks.onPhotosSelected(selectedPhotos);
+        callback().onPhotosSelected(selectedPhotos);
         break;
       default:
         throw new IllegalArgumentException("menu selection not supported");
