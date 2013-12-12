@@ -46,7 +46,7 @@ public class FlowFragment extends Fragment {
     this.photos.add(toAdd);
   }
 
-  public void addPhotos(Integer[] photoIds) {
-    this.photos.addAll(Arrays.asList(photoIds));
+  public void addPhotos(List<Integer> photoIds) {
+    this.photos.addAll(photoIds);
   }
 }

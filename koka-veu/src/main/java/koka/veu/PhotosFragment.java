@@ -12,9 +12,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class PhotosFragment extends Fragment {
   protected GridView gridview;
   protected Callbacks mCallbacks;
+
+  private List<Integer> selectedPhotos = new ArrayList<Integer>();
 
   /**
    * A dummy implementation of the {@link Callbacks} interface that does
@@ -26,7 +31,7 @@ public abstract class PhotosFragment extends Fragment {
     }
 
     @Override
-    public void onPhotosSelected(Integer[] photoIds) {
+    public void onPhotosSelected(List<Integer> photoIds) {
     }
   };
 
@@ -56,6 +61,9 @@ public abstract class PhotosFragment extends Fragment {
 //        for (Integer pos : positions) {
 //          sb.append(" " + pos + ",");
 //        }
+        mCallbacks.onPhotosSelected(selectedPhotos);
+        selectedPhotos.clear();
+
         sb.append("rawr");
         Toast.makeText(getActivity(), sb.toString(), Toast.LENGTH_SHORT).show();
         actionMode.finish();
@@ -64,6 +72,7 @@ public abstract class PhotosFragment extends Fragment {
 
       public void onItemCheckedStateChanged(
           ActionMode mode, int position, long id, boolean checked) {
+        selectedPhotos.add(PhotoImageAdapter.getItemAt(position));
         int selectCount = gridview.getCheckedItemCount();
         switch (selectCount) {
           case 1:
@@ -107,7 +116,7 @@ public abstract class PhotosFragment extends Fragment {
   public interface Callbacks {
     void onPhotoSelected(Integer photoId);
 
-    void onPhotosSelected(Integer[] photoIds);
+    void onPhotosSelected(List<Integer> photoIds);
   }
 
   public static final class TwoPanePhotosFragment extends PhotosFragment {

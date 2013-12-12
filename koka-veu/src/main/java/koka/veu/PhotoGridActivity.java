@@ -4,7 +4,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
+
+import java.util.List;
 
 public class PhotoGridActivity extends FragmentActivity
     implements PhotosFragment.Callbacks {
@@ -46,7 +47,7 @@ public class PhotoGridActivity extends FragmentActivity
   }
 
   @Override
-  public void onPhotosSelected(Integer[] photoIds) {
+  public void onPhotosSelected(List<Integer> photoIds) {
     if (mTwoPane) {
       FlowFragment fragment = new FlowFragment();
       fragment.addPhotos(photoIds);
