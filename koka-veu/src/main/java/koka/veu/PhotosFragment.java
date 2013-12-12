@@ -3,16 +3,11 @@ package koka.veu;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PhotosFragment extends Fragment {
@@ -103,54 +98,6 @@ public abstract class PhotosFragment extends Fragment {
           Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
         }
       };
-    }
-  }
-
-  private static class GalleryMultiChoiceListener
-      implements GridView.MultiChoiceModeListener {
-    private List<Integer> selectedPhotos = new ArrayList<Integer>();
-    private final Callbacks mCallbacks;
-
-    private GalleryMultiChoiceListener(Callbacks mCallbacks) {
-      this.mCallbacks = mCallbacks;
-    }
-
-    @Override
-    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-      MenuInflater inflater = actionMode.getMenuInflater();
-      inflater.inflate(R.menu.gallery_multiselect, menu);
-      return true;
-    }
-
-    @Override
-    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-      return false;
-    }
-
-    @Override
-    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-      StringBuilder sb = new StringBuilder();
-//        Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
-//        for (Integer pos : positions) {
-//          sb.append(" " + pos + ",");
-//        }
-      mCallbacks.onPhotosSelected(selectedPhotos);
-      selectedPhotos.clear();
-
-      sb.append("rawr");
-      actionMode.finish();
-      return false;
-    }
-
-    public void onItemCheckedStateChanged(
-        ActionMode mode, int position, long id, boolean checked) {
-      selectedPhotos.add(PhotoImageAdapter.getItemAt(position));
-      mode.setSubtitle("" + selectedPhotos.size() + " items selected");
-    }
-
-    @Override
-    public void onDestroyActionMode(ActionMode actionMode) {
-//        mAdapter.clearSelection();
     }
   }
 }
