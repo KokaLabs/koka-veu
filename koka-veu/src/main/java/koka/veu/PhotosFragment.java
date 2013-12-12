@@ -19,8 +19,6 @@ public abstract class PhotosFragment extends Fragment {
   protected GridView gridview;
   protected Callbacks mCallbacks;
 
-  private List<Integer> selectedPhotos = new ArrayList<Integer>();
-
   /**
    * A dummy implementation of the {@link Callbacks} interface that does
    * nothing. Used only when this fragment is not attached to an activity.
@@ -41,54 +39,8 @@ public abstract class PhotosFragment extends Fragment {
     gridview = (GridView) this.getActivity().findViewById(R.id.photogrid);
     gridview.setAdapter(new PhotoImageAdapter(this.getActivity()));
     gridview.setOnItemClickListener(onPhotoSelected());
-    gridview.setMultiChoiceModeListener(new GridView.MultiChoiceModeListener() {
-      @Override
-      public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-        MenuInflater inflater = actionMode.getMenuInflater();
-        inflater.inflate(R.menu.gallery_multiselect, menu);
-        return true;
-      }
-
-      @Override
-      public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-        return false;
-      }
-
-      @Override
-      public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-        StringBuilder sb = new StringBuilder();
-//        Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
-//        for (Integer pos : positions) {
-//          sb.append(" " + pos + ",");
-//        }
-        mCallbacks.onPhotosSelected(selectedPhotos);
-        selectedPhotos.clear();
-
-        sb.append("rawr");
-        Toast.makeText(getActivity(), sb.toString(), Toast.LENGTH_SHORT).show();
-        actionMode.finish();
-        return false;
-      }
-
-      public void onItemCheckedStateChanged(
-          ActionMode mode, int position, long id, boolean checked) {
-        selectedPhotos.add(PhotoImageAdapter.getItemAt(position));
-        int selectCount = gridview.getCheckedItemCount();
-        switch (selectCount) {
-          case 1:
-            mode.setSubtitle("One item selected");
-            break;
-          default:
-            mode.setSubtitle("" + selectCount + " items selected");
-            break;
-        }
-      }
-
-      @Override
-      public void onDestroyActionMode(ActionMode actionMode) {
-//        mAdapter.clearSelection();
-      }
-    });
+    gridview.setMultiChoiceModeListener(
+        new GalleryMultiChoiceListener(mCallbacks));
   }
 
   @Override
@@ -151,6 +103,54 @@ public abstract class PhotosFragment extends Fragment {
           Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
         }
       };
+    }
+  }
+
+  private static class GalleryMultiChoiceListener
+      implements GridView.MultiChoiceModeListener {
+    private List<Integer> selectedPhotos = new ArrayList<Integer>();
+    private final Callbacks mCallbacks;
+
+    private GalleryMultiChoiceListener(Callbacks mCallbacks) {
+      this.mCallbacks = mCallbacks;
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+      MenuInflater inflater = actionMode.getMenuInflater();
+      inflater.inflate(R.menu.gallery_multiselect, menu);
+      return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+      return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+      StringBuilder sb = new StringBuilder();
+//        Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
+//        for (Integer pos : positions) {
+//          sb.append(" " + pos + ",");
+//        }
+      mCallbacks.onPhotosSelected(selectedPhotos);
+      selectedPhotos.clear();
+
+      sb.append("rawr");
+      actionMode.finish();
+      return false;
+    }
+
+    public void onItemCheckedStateChanged(
+        ActionMode mode, int position, long id, boolean checked) {
+      selectedPhotos.add(PhotoImageAdapter.getItemAt(position));
+      mode.setSubtitle("" + selectedPhotos.size() + " items selected");
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode actionMode) {
+//        mAdapter.clearSelection();
     }
   }
 }
