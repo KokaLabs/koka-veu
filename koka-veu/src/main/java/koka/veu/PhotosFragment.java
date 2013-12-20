@@ -2,10 +2,13 @@ package koka.veu;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -83,8 +86,10 @@ public abstract class PhotosFragment extends Fragment {
     protected AdapterView.OnItemClickListener onPhotoSelected() {
       return new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+          ColorMatrix cm = new ColorMatrix();
+          cm.setSaturation(0);
+          ((ImageView) v).setColorFilter(new ColorMatrixColorFilter(cm));
           mCallbacks.onPhotoSelected(PhotoImageAdapter.getItemAt(position));
-          Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
         }
       };
     }
