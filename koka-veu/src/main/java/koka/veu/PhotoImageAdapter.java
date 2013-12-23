@@ -13,6 +13,7 @@ public class PhotoImageAdapter extends BaseAdapter {
     mContext = c;
   }
 
+  @Override
   public int getCount() {
     return mThumbIds.length;
   }
@@ -26,10 +27,12 @@ public class PhotoImageAdapter extends BaseAdapter {
     return mThumbIds[position];
   }
 
+  @Override
   public long getItemId(int position) {
     return 0;
   }
 
+  @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     ImageView imageView;
     if (convertView == null) {  // if it's not recycled, initialize some attributes

@@ -2,8 +2,11 @@ package koka.veu;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -86,9 +89,15 @@ public abstract class PhotosFragment extends Fragment {
     protected AdapterView.OnItemClickListener onPhotoSelected() {
       return new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-          ColorMatrix cm = new ColorMatrix();
-          cm.setSaturation(0);
-          ((ImageView) v).setColorFilter(new ColorMatrixColorFilter(cm));
+//          PorterDuffColorFilter pd = new PorterDuffColorFilter(Color.argb(200, 255, 255, 255), PorterDuff.Mode.SRC_OVER);
+//          ((ImageView) v).setColorFilter(pd);
+////          ColorMatrix cm = new ColorMatrix();
+////          cm.setSaturation(0);
+//
+////          v.setAlpha(0);
+//          v.setBackgroundColor(Color.BLACK);
+          ((ImageView) v).setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
+
           mCallbacks.onPhotoSelected(PhotoImageAdapter.getItemAt(position));
         }
       };
