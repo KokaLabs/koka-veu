@@ -1,6 +1,9 @@
 language: java
 
 before_install:
-  - wget -O android-sdk-linux.tar.gz http://dl.google.com/android/android-sdk_r22.3-linux.tgz
-  - test "9b7fc38f27e411297f4a183019ea2c10b1148252" = "$(sha1sum android-sdk-linux.tar.gz | cut -f 1 -d ' ')"
+  - LOCATION="http://dl.google.com/android/android-sdk_r22.3-linux.tgz"
+  - EXPECTED_SHA1="9b7fc38f27e411297f4a183019ea2c10b1148252"
+  - wget -O android-sdk-linux.tar.gz ${LOCATION}
+  - ACTUAL_SHA1=$(sha1sum android-sdk-linux.tar.gz | cut -f 1 -d ' ')
+  - test "${EXPECTED_SHA1}" = "${ACTUAL_SHA1}"
   - export ANDROID_HOME=android-sdk-linux
