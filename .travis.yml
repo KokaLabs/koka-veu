@@ -11,8 +11,8 @@ before_install:
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - SUPPORT_REPO_NUM=$(android list sdk --no-ui | grep "Android Support Repository" | cut -f 1 -d '-')
   - echo "y" | android update sdk --filter "${SUPPORT_REPO_NUM}" --no-ui --force
-  - BUILD_TOOLS_NUM=$(android list sdk -a --no-ui | grep "Android SDK Build-tools, revision 19" | cut -f 1 -d '-')
-  - echo "y" | android update sdk -a --filter "${BUILD_TOOLS_NUM}" --no-ui --force
+  - BUILD_TOOLS_NUM=$(android list sdk -o --no-ui | grep "Android SDK Build-tools, revision 19" | cut -f 1 -d '-')
+  - echo "y" | android update sdk -o --filter "${BUILD_TOOLS_NUM}" --no-ui --force
   - PLATFORM_TOOLS_NUM=$(android list sdk --no-ui | grep "Android SDK Platform-tools" | cut -f 1 -d '-')
   - sudo apt-get install -q libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386
   - echo "y" | android update sdk --filter "${PLATFORM_TOOLS_NUM}" --no-ui --force
