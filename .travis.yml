@@ -2,5 +2,5 @@ language: java
 
 before_install:
   - wget -O android-sdk-linux.tar.gz http://dl.google.com/android/android-sdk_r22.3-linux.tgz
-  - [ "9b7fc38f27e411297f4a183019ea2c10b1148252" = "$(sha1sum android-sdk-linux.tar.gz)" ]
+  - test "9b7fc38f27e411297f4a183019ea2c10b1148252" = "$(sha1sum android-sdk-linux.tar.gz)"
   - export ANDROID_HOME=android-sdk-linux
