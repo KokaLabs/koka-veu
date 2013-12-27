@@ -6,4 +6,5 @@ before_install:
   - wget -O android-sdk-linux.tar.gz ${LOCATION}
   - ACTUAL_SHA1=$(sha1sum android-sdk-linux.tar.gz | cut -f 1 -d ' ')
   - test "${EXPECTED_SHA1}" = "${ACTUAL_SHA1}"
+  - tar -xvf android-sdk-linux.tar.gz
   - export ANDROID_HOME=android-sdk-linux
