@@ -1,1 +1,6 @@
 language: java
+
+before_insatll:
+  - wget -O android-sdk-linux.tar.gz http://dl.google.com/android/android-sdk_r22.3-linux.tgz
+  - echo "f6bb9af5a0494dfbf490bd7f2db01102b7e7b142 android-sdk-linux.tar.gz" | sha1sum -c -
+  - export ANDROID_HOME=android-sdk-linux
