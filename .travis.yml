@@ -10,9 +10,9 @@ before_install:
   - export ANDROID_HOME=android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools
   - SUPPORT_REPO_NUM=$(android list sdk --no-ui | grep "Android Support Repository" | cut -f 1 -d '-')
-  - PLATFORM_TOOLS_NUM=$(android list sdk --no-ui | grep "Android SDK Platform-tools" | cut -f 1 -d '-')
-  - SDK_NUM=$(android list sdk --no-ui | grep -E "SDK Platform Android.*API 19" | cut -f 1 -d '-')
   - echo "y" | android update sdk --filter "${SUPPORT_REPO_NUM}" --no-ui --force
+  - PLATFORM_TOOLS_NUM=$(android list sdk --no-ui | grep "Android SDK Platform-tools" | cut -f 1 -d '-')
   - echo "y" | android update sdk --filter "${PLATFORM_TOOLS_NUM}" --no-ui --force
+  - SDK_NUM=$(android list sdk --no-ui | grep -E "SDK Platform Android.*API 19" | cut -f 1 -d '-')
   - echo "y" | android update sdk --filter "${SDK_NUM}" --no-ui --force
 
